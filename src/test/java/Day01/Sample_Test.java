@@ -1,3 +1,4 @@
+package Day01;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Assertions;
@@ -17,10 +18,12 @@ public class Sample_Test {
     @DisplayName("I am testing the name")
     @Test
     public void nameTest(){
-
-        assertEquals("Firuz"+"Khalimov","FiruzKhalimov");
+        String name ="Firuz";
+        String lastName="Khalimov";
+        assertEquals(name+" "+lastName,"Firuz Khalimov");
 
     }
+
 
 
 }
