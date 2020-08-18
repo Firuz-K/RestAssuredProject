@@ -79,6 +79,7 @@ public class HamcrestMatcher {
                 prettyPeek().
                 then().
                 statusCode(is(200));
+        System.out.println("The work is done");
     }
 
 
