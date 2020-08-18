@@ -1,8 +1,6 @@
 package Day01;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class BeforeAndAfterJunit5 {
 
@@ -12,14 +10,30 @@ public class BeforeAndAfterJunit5 {
     public static void setup(){
         System.out.println("This runs before all");
     }
-    @Test
-    public void test1(){
-        System.out.println("Test is running");
+
+    @BeforeEach
+    public void beforeEachTest(){
+        System.out.println("Running before each test");
     }
 
+    @Test
+    public void test1(){
+        System.out.println("Test1 is running");
+    }
+    @Disabled
+    @Test
+    public void test2(){
+        System.out.println("Test2 is running");
+    }
+
+
+    @AfterEach
+    public void afterEachTest(){
+        System.out.println("This runs after each test");
+    }
     @AfterAll
     public static void cleanUp(){
-        System.out.println("This is cleanup");
+        System.out.println("This is AfterAll");
     }
 
 }

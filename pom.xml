@@ -35,6 +35,13 @@
             <artifactId>junit-jupiter</artifactId>
             <version>5.7.0-RC1</version>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.3.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
 
 </project>
