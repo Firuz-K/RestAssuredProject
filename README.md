@@ -1,8 +1,6 @@
 # RestAssuredProject
 
-I am addding this readme.md file
+Rest assured library is used to automate API testing
 
-I made a line from master
-
-So no from local
+It uses Junit 5,junit jupiter to be exact
 
