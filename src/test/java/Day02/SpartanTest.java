@@ -6,6 +6,7 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import sun.awt.image.GifImageDecoder;
 
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static io.restassured.RestAssured.*;
@@ -47,6 +48,7 @@ public class SpartanTest {
 
         when()
                 .get("/spartans").
+               prettyPeek().
 
         then()
                 .statusCode(is(200))
@@ -63,7 +65,27 @@ public class SpartanTest {
                 RestAssured.basePath=("/api");
     }
 
+    @DisplayName("Get one spartan")
+    @Test
+    public void testSingleSpartan(){
 
+        // i want to log the request I sent so Isee what is URL
+        given()
+                .log().all().
+
+       when()
+               .get("/spartans/128").
+             //  prettyPeek().
+
+                then()
+                .statusCode(200)
+                .log().all();
+                //.log().all();
+              // .log().body();
+    }
+
+
+    @DisplayName("Hello from Sparta test")
     @Test
     public void hello(){
 
