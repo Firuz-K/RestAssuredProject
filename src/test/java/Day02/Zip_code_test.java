@@ -46,6 +46,33 @@ public class Zip_code_test {
                .body("places[0].'state abbreviation'",is("PA"))
                .body("places[0].latitude",is("40.0634"));
 
+    }
+
+    @DisplayName("Getting from City to Zip")
+    @Test
+    public void city_to_zip(){
+
+        given()
+                .log().all().
+          //      .pathParam("state","PA")
+           //     .pathParam("city","Philadelphia").
+
+        when()
+                .get("/{state}/{city}","PA","Philadelphia").
+
+        then()
+                .statusCode(200)
+                .log().all()
+                .contentType(ContentType.JSON)
+                .body("'country abbreviation'", is("US"))
+                .body("places[0].'place name'",is("New Philadelphia"))
+        // jasonPath hackf for getting last  item from jsonArray
+        // -1 index indicate the last item, only works here not postman
+
+        .body("places[-1].latitude",is("40.0018"))
+
+        ;
+
 
 
     }
