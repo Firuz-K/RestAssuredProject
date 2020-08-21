@@ -26,11 +26,11 @@ public class Practice1 {
     public void test1(){
 
         RestAssured.given()
-                .queryParam("gender","Female").
+                .log().all().
                 when()
-                .get("/spartans/search").
+                .get("/spartans").
                 then()
-                .statusCode(is(200))
+                //.statusCode(is(200))
         .log().all()
                 ;
 
