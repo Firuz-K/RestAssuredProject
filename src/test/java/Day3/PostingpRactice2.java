@@ -5,7 +5,6 @@ import static io.restassured.RestAssured.*;
 import io.restassured.http.ContentType;
 import  io.restassured.path.json.JsonPath;
 
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
