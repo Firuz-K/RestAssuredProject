@@ -2,7 +2,6 @@ package Day4;
 
 import com.github.javafaker.Faker;
 import java.io.File;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -95,6 +94,7 @@ public class PostRequestTest {
 
                 then()
                 .statusCode(is(201)).
+                body("data.name",is("Firuz")).
                 log().all();
     }
 
