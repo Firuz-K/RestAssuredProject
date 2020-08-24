@@ -87,7 +87,7 @@ public class PostRequestTest {
 
         given()
                 .contentType(ContentType.JSON)
-                .body(bodymap). // jason data-bind will turn your java map in to json
+                .body(bodymap). // jackson data-bind will turn your java map in to json
 
                 when()
                 .post("/spartans").
