@@ -1,14 +1,9 @@
 package Day4;
 
 import POJO.Spartan;
-import com.github.javafaker.Faker;
-import java.io.File;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;

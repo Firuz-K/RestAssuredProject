@@ -1,7 +1,5 @@
 package POJO;
 
-import javax.swing.*;
-
 public class Spartan {
 
     private String name;

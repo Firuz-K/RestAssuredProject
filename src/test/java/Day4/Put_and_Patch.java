@@ -30,7 +30,7 @@ public class Put_and_Patch {
     @Test
     public void testPutRequestWithMap(){
 
-        // put request to update spartan with id 421
+        // put request to update spartan with id 186
         // name: put iwth map, gender: Male, phone:123123123123
         // status code is 204
         // how do I actually know it's updated since it does not have a body in request
