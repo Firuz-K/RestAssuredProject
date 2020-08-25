@@ -69,10 +69,10 @@ public class JsonToPojo {
 
        // System.out.println(firstMaleSpartan);
 
-        System.out.println("The Spartan id from POJ0  "+firstMaleSpartan.getId());
-        System.out.println("The Spartan name from POJ0  "+firstMaleSpartan.getName());
-        System.out.println("The Spartan gender from POJ  "+firstMaleSpartan.getGender());
-        System.out.println("The Spartan phone from POJ0  "+firstMaleSpartan.getPhone());
+        System.out.println("The Spartan id from POJ0  "+ firstMaleSpartan.getId());
+        System.out.println("The Spartan name from POJ0  "+ firstMaleSpartan.getName());
+        System.out.println("The Spartan gender from POJ  "+ firstMaleSpartan.getGender());
+        System.out.println("The Spartan phone from POJ0  "+ firstMaleSpartan.getPhone());
 
     }
 

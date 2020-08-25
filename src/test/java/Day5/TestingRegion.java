@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class TestingRegion {
 
 
@@ -32,10 +34,29 @@ public class TestingRegion {
 
 
         Region region = response.as(Region.class);
+    }
 
 
+    @Test
+    public void testRegionJsonArrayToPojoList(){
 
 
+        Response response=
+                RestAssured.given()
+                .accept(ContentType.JSON)
+                .log().all().
 
+        when()
+                .get("/regions").prettyPeek();
+
+       JsonPath jp = response.jsonPath();
+
+       List<Region> list1 =jp.getList("items",Region.class);
+
+       // String list1 = jp.getString("items[-1].region_name");
+
+
+        System.out.println("========================================");
+        System.out.println(list1);
     }
 }

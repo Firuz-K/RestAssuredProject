@@ -29,7 +29,7 @@ public class Region {
     public String toString(){
         return "Region{" +
                 "region_id=" + region_id +
-                ", region_name='" + region_name + '\'' +
+                ", region_name= " + region_name + '\'' +
                 '}';
     }
 
