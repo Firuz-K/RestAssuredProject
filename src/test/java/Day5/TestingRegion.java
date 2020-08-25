@@ -34,6 +34,7 @@ public class TestingRegion {
 
 
         Region region = response.as(Region.class);
+        System.out.println(region);
     }
 
 

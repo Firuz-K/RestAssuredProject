@@ -28,9 +28,11 @@ public class DepartementsSerialization {
         RestAssured.given()
                 .accept(ContentType.JSON).
                 when()
-                .get("/departments").prettyPeek();
+                .get("/departments/{department_id}",250).prettyPeek();
 
         JsonPath jp = response.jsonPath();
+
+        Departments dp= response.as(Departments.class);
 
        // List<String> list1 = jp.getList("items");
 
@@ -38,10 +40,10 @@ public class DepartementsSerialization {
 
         //List<String> list1 = jp.getList("items.department_name");
 
-        List<Departments> list1 = jp.getList("items",Departments.class);
+        //List<Departments> list1 = jp.getList("items",Departments.class);
 
         System.out.println("==================================");
-        System.out.println(list1);
+        System.out.println(dp);
     }
 
 }
