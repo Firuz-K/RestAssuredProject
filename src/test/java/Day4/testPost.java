@@ -18,7 +18,7 @@ public class testPost {
 
     @BeforeAll
     public static void setUp(){
-        baseURI="http://52.3.242.24";
+        baseURI="http://54.160.106.84";
         port=8000;
         basePath="/api";
     }
@@ -52,5 +52,16 @@ public class testPost {
 
     }
 
+
+    @Test
+    public void test(){
+
+        RestAssured.given()
+                .auth().basic("admin","admin")
+                .log().all()
+
+                .when()
+                .get("/spartans").then().log().all();
+    }
 
 }
