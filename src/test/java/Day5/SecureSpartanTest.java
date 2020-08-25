@@ -41,7 +41,7 @@ public class SecureSpartanTest {
                 .auth().basic("admin","admin").
 
 
-                when()
+         when()
                 .get("/spartans/{id}",188).
 
                 then().statusCode(200).log().all();
@@ -62,7 +62,7 @@ public class SecureSpartanTest {
                 .body(spartan)
                 .contentType(ContentType.JSON).
 
-                when()
+        when()
                 .post("/spartans")
                 .prettyPeek();
 
