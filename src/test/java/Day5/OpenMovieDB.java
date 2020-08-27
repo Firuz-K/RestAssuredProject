@@ -25,21 +25,27 @@ public class OpenMovieDB {
        Response response = RestAssured.given()
                .accept(ContentType.JSON)
                 .queryParam("apikey","26aa5b74")
-                .queryParam("s","Superman").
+                .queryParam("s","Breaking bad").
 
                 when()
                 .get().prettyPeek();
 
-        JsonPath jp = response.jsonPath();
+        //MovieDB movieDB= response.jsonPath().getObject("Search",MovieDB.class);
+
+       // JsonPath jp = response.jsonPath();
+        List<MovieDB> listOfMovies=response.jsonPath().getList("Search",MovieDB.class);
 
        // MovieDB movieDB=response.as(MovieDB.class);
      // List<String> listOfTitle = jp.getList("Search.Title");
-        List<MovieDB> allMovies=jp.getList("Search");
+        //List<MovieDB> allMovies=jp.getList("Search");
 
         //List<String> allMovies=jp.getList("Search.Year");
         System.out.println("=========================================");
-        System.out.println(allMovies);
-        System.out.println("allMovies.size() = " + allMovies.size());
+
+        listOfMovies.forEach(each->  System.out.println(each));
+
+     //  System.out.println(listOfMovies);
+       // System.out.println("allMovies.size() = " + allMovies.size());
 
 
     }

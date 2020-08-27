@@ -1,39 +1,42 @@
 package POJO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieDB {
-
-
-    private String title;
-    private String year;
+    @JsonProperty("Title")
+    private String Title;
+    @JsonProperty("Year")
+    private String Year;
     private String imdbID;
-    private String type;
+    @JsonProperty("Type")
+    private String Type;
+    @JsonProperty("Poster")
     private String Poster;
 
     public String getPoster() {
         return Poster;
     }
 
-    public void setPoster(String poster) {
-        Poster = poster;
+    public void setPoster(String Poster) {
+        this.Poster = Poster;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
-    public void setTitle(String title) {
-        title = title;
+    public void setTitle(String Title) {
+        this.Title = Title;
     }
 
     public String getYear() {
-        return year;
+        return Year;
     }
 
-    public void setYear(String year) {
-        year = year;
+    public void setYear(String Year) {
+        this.Year = Year;
     }
 
     public String getImdbID() {
@@ -45,11 +48,11 @@ public class MovieDB {
     }
 
     public String getType() {
-        return type;
+        return Type;
     }
 
-    public void setType(String type) {
-        type = type;
+    public void setType(String Type) {
+        Type = Type;
     }
 
 
@@ -58,20 +61,20 @@ public class MovieDB {
     public MovieDB(){}
 
     public MovieDB(String Title, String Year,String imdbID,String Type, String Poster){
-        this.title=Title;
-        this.year=Year;
+        this.Title=Title;
+        this.Year=Year;
         this.imdbID=imdbID;
-        this.type=Type;
+        this.Type=Type;
         this.Poster= Poster;
     }
 
     @Override
     public String toString(){
         return " MovieDB { "+
-                " Title = "+title+
-                " Year = "+year+
+                " Title = "+Title+
+                " Year = "+Year+
                 " imdbID = "+imdbID+
-                " Type = "+type+
+                " Type = "+Type+
                 " Poster = "+Poster+ " } ";
     }
 
