@@ -35,14 +35,20 @@ public class OpenMovieDB {
        // JsonPath jp = response.jsonPath();
         List<MovieDB> listOfMovies=response.jsonPath().getList("Search",MovieDB.class);
 
+        List<String> listString = response.jsonPath().getList("Search.Title");
        // MovieDB movieDB=response.as(MovieDB.class);
      // List<String> listOfTitle = jp.getList("Search.Title");
         //List<MovieDB> allMovies=jp.getList("Search");
 
         //List<String> allMovies=jp.getList("Search.Year");
         System.out.println("=========================================");
+        System.out.println(listString);
+        //listString.forEach(each-> System.out.println(each));
 
-        listOfMovies.forEach(each->  System.out.println(each));
+        for(String each: listString){
+            System.out.println(each);
+        }
+        //listOfMovies.forEach(each->  System.out.println(each));
 
      //  System.out.println(listOfMovies);
        // System.out.println("allMovies.size() = " + allMovies.size());
