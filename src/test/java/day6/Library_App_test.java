@@ -33,9 +33,9 @@ public class Library_App_test {
                 .get("/dashboard_stats").prettyPeek().
         then()
                 .statusCode(is(200))
-                .body("book_count", is("1671"))
-                .body("borrowed_books",equalTo("108"))
-                .body("users", is("759"));
+                .body("book_count", is("1005"))
+                .body("borrowed_books",equalTo("606"))
+                .body("users", is("5102"));
 
     }
 
@@ -44,14 +44,14 @@ public class Library_App_test {
     public void test(){
         RestAssured.given()
                 .log().all()
-                .contentType(ContentType.URLENC)
+                //.contentType(ContentType.URLENC)
                 .formParam("token",libraryToken).
         when()
                 .post("/decode")
         .then()
                 .log().all()
                 .statusCode(200)
-        .body("email",is("librarian20@library"))
+        .body("email",is("librarian69@library"))
 
         ;
     }
