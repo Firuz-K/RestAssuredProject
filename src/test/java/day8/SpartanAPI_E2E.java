@@ -3,13 +3,11 @@ package day8;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import javafx.application.Application;
 import org.junit.jupiter.api.*;
-
 import java.io.File;
-import java.io.FileInputStream;
 
 import static org.hamcrest.Matchers.is;
+
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SpartanAPI_E2E {
@@ -41,6 +39,8 @@ public class SpartanAPI_E2E {
 
        id= response.jsonPath().getInt("data.id");
 
+        System.out.println("Newly created id is = "+id);
+
 
 
     }
@@ -57,6 +57,7 @@ public class SpartanAPI_E2E {
                 .get("spartans/{id}").prettyPeek().
                 then()
         .statusCode(is(200));
+        System.out.println("Getting newly created id = "+id);
 
     }
 
@@ -64,12 +65,52 @@ public class SpartanAPI_E2E {
     @Test
     public void testUpdateData() {
 
+        System.out.println("Updating spartan with ID = "+id);
+
+        File file = new File("updatedBody.json");
+
+        RestAssured.given()
+
+                .contentType(ContentType.JSON)
+                .pathParam("id",id)
+                .body(file).log().all().
+
+                when()
+                .put("/spartans/{id}").
+
+                then()
+                .statusCode(is(204));
+
 
     }
 
     @Order(4)
     @Test
+    public void testReadUpdatedData() {
+
+        RestAssured.given()
+                .log().all()
+                .pathParam("id",id)
+
+                .when()
+                .get("spartans/{id}").prettyPeek().
+                then()
+                .statusCode(is(200));
+        System.out.println("Spartan with id = "+id+" is updated ");
+
+    }
+
+    @Order(5)
+    @Test
     public void testDeleteData() {
+
+        RestAssured.given().log().all()
+                .pathParam("id",id )
+                .when()
+                .delete("spartans/{id}").
+
+                then()
+                .statusCode(is(204));
 
 
     }
