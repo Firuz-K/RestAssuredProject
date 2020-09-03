@@ -2,6 +2,7 @@ package day9;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -33,16 +34,28 @@ public class ZippopotamWithCSV {
                 .prettyPeek();
 
        List<String> listOfNames = response.jsonPath().getList("places.'place name'");
-        assertThat(listOfNames.size(),is(numberOfZipcodes));
-
        String placeName = response.jsonPath().getString("'place name'");
 
-        //System.out.println("List fo names"+listOfNames.size());
-
-       // Assertions.assertEquals(listOfNames.size(),numberOfZipcodes);
         assertThat(listOfNames.size(),is(numberOfZipcodes));
         assertThat(placeName,is(city));
+        assertThat(listOfNames.size(),is(numberOfZipcodes));
+
+        System.out.println("response.jsonPath().getInt(\"places.size()\") = " + response.jsonPath().getInt("places.size()"));
 
 
+    }
+
+    @Test
+    public void testSingle(){
+
+        Response response=
+                given()
+                        .baseUri("http://api.zippopotam.us/us")
+
+                        .when()
+                        .get("/{expectedState}/{city}","PA","New Philadelphia")
+                        .prettyPeek();
+
+        response.then().statusCode(200);
     }
 }
