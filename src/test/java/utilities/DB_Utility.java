@@ -114,6 +114,8 @@ public class DB_Utility {
             e.printStackTrace();
         }
 
+        System.out.println("All connection is destroyed !!!");
+
     }
 
 
