@@ -5,7 +5,6 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import java.io.File;
-
 import static org.hamcrest.Matchers.is;
 
 
@@ -30,10 +29,10 @@ public class SpartanAPI_E2E {
         Response response=
         RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body(jsonFile).
+                .body(jsonFile).log().all().
 
                 when()
-                .post("/spartans");
+                .post("/spartans").prettyPeek();
 
 
 
@@ -79,7 +78,7 @@ public class SpartanAPI_E2E {
                 .put("/spartans/{id}").
 
                 then()
-                .statusCode(is(204));
+                .statusCode(is(204)).log().all();
 
 
     }
@@ -95,7 +94,7 @@ public class SpartanAPI_E2E {
                 .when()
                 .get("spartans/{id}").prettyPeek().
                 then()
-                .statusCode(is(200));
+                .statusCode(is(200)).log().all();
         System.out.println("Spartan with id = "+id+" is updated ");
 
     }
@@ -110,7 +109,7 @@ public class SpartanAPI_E2E {
                 .delete("spartans/{id}").
 
                 then()
-                .statusCode(is(204));
+                .statusCode(is(204)).log().all();
 
 
     }

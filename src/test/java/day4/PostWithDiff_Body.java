@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class PostRequestTest {
+public class PostWithDiff_Body {
 
 
 

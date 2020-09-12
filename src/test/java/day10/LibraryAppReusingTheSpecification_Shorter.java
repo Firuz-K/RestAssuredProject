@@ -1,11 +1,9 @@
 package day10;
 
 import static io.restassured.RestAssured.*;
-
 import POJO.Category;
 import POJO.User;
 import io.restassured.RestAssured;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -14,100 +12,86 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utilities.ConfigurationReader;
 import utilities.LibraryUtil;
-
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
 
 public class LibraryAppReusingTheSpecification_Shorter {
 
 
     @BeforeAll
-    public static void setUp() {
+    public static void init(){
+
         RestAssured.baseURI = ConfigurationReader.getProperty("library1.base_url");
-        RestAssured.basePath = "/rest/v1";
+        RestAssured.basePath = "/rest/v1" ;
 
-
-        String token = LibraryUtil.loginAndGetToken(ConfigurationReader.getProperty("library1.librarian_username"),
-                ConfigurationReader.getProperty("library1.librarian_password"));
-
-        RestAssured.requestSpecification = given()
-                .accept(ContentType.JSON)
-                .log().all()
-                .header("x-library-token", token);
-
-        RestAssured.responseSpecification = expect().statusCode(is(200))
-                .contentType(ContentType.JSON)
-                .logDetail(LogDetail.ALL);
-    }
-
-
-    @Test
-    public void testLibrary() {
-
-        Response response =
-                when()
-                        .get("/get_book_categories");
-
-
-        JsonPath jp = response.jsonPath();
-
-        List<Category> map =jp.getList("",Category.class);
-        System.out.println(map);
-
-        List<Map<String, String>> listOfMap = jp.getList("");
-        System.out.println(listOfMap);
-
+        String theToken = LibraryUtil.loginAndGetToken("librarian69@library","KNPXrm3S");
+        // just like we set the baseURI and basePath
+        // we are using the static field of RestAssured to set it at global level
+        RestAssured.requestSpecification  = given().accept(ContentType.JSON)  // we want json back
+                .log().all()               // we want to log all
+                .header("x-library-token", theToken) ; // we want to set the token header
+        // we are using the static field of RestAssured to set it at global level
+        RestAssured.responseSpecification =  expect().statusCode(200)       // expecting the Response status code 200
+                .contentType(ContentType.JSON)  // contentType is json
+                .log().all();     // want to log all of them
 
     }
 
-    @DisplayName("Getting all users")
+    /**
+     * Practice the De-Serialization using the same test
+     * get the Map<String,String> object out of the response of GET /dashboard_stats
+     * get the List<Category> object from the response of GET /get_book_categories
+     * get the List<User> object from the response of GET /get_all_users
+     * hint : you will need to create 2 POJO class called Category , User;
+     *
+     */
+    @DisplayName("Testing GET /get_book_categories Endpoint with spec")
     @Test
-    public void testGetAllUser() {
-        Response response =
-                when()
-                        .get("/get_all_users");
+    public void testLibrary(){
 
-        JsonPath jp = response.jsonPath();
+        Response response = when()
+                .get("/get_book_categories");
+        List<Category> categoryList = response.jsonPath().getList("", Category.class) ;
+        System.out.println("categoryList = " + categoryList);
 
-        List<User> listOfUsers=jp.getList("", User.class);
-        System.out.println(listOfUsers);
-
+        // above code is great , but what if I wanted to
+        // store each category as map rather than pojo
+        // Each category is key value pair --->> Map
+        // and we have many category  --->> List<Map>
+        // jsonPath methods always try to help to convert the types where it can
+        // in this case , each category in jsonArray we tryied to store into map then get a list out of it
+        // and Jackson databind take care of all conversion
+        //List< Map<String,String> > categoryMapList = response.jsonPath().getList("");
+        List< Map<Integer,String> > categoryMapList = response.jsonPath().getList("");
+        System.out.println("categoryMapList = " + categoryMapList);
 
     }
 
-
-    @DisplayName("Getting dashboard stats")
+    @DisplayName("Testing GET /get_all_users Endpoint with spec")
     @Test
-    public void testGetDashboardStatus() {
+    public void testGetAllUsers(){
 
-        Response response =
-                when()
-                        .get("/dashboard_stats").prettyPeek();
 
+        Response response =  when().get(" /get_all_users");
         JsonPath jp = response.jsonPath();
+        List<User> allUserLst = jp.getList("", User.class) ;
+        System.out.println("allUserLst = " + allUserLst);
 
-        Map<String, String> map = new LinkedHashMap<>();
-        map = response.jsonPath().getMap("");
+    }
+
+    //* get the Map<String,String> object out of the response of GET /dashboard_stats
+    @DisplayName("Testing GET /dashboard_stats Endpoint with spec")
+    @Test
+    public void testGet_Dashboard_stats(){
 
 
-/*
-       String bookCount= jp.getString("book_count");
-       String borrowed_books=jp.getString("borrowed_books");
-       String users = jp.getString("users");
-
-         map.put("book_count ", bookCount);
-         map.put("borrowed_books ",borrowed_books);
-         map.put("users ",users);
-
- */
-
-        System.out.println(map);
-
+        Response response =  when().get(" /dashboard_stats").prettyPeek();
+        // if there is no path needed to get to what you are looking for
+        // or if you wanted to point to your entire response , you can just provide ""
+        Map<String,Integer> statMap = response.jsonPath().getMap("") ;
+        System.out.println("statMap = " + statMap);
 
     }
 
