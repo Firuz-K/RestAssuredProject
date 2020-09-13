@@ -33,7 +33,7 @@ public class HR_ORDS_POJO_TEST {
 
         System.out.println("===========================================");
         Locations locations = response.as(Locations.class);
-        System.out.println(locations);
+        System.out.println("locations is = "+locations);
     }
 
 }
